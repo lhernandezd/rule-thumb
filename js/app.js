@@ -6,8 +6,8 @@ class State {
 
     for (let i = 0; i<size; i++) {
       this.state[`${i}`] = {};
-      this.total[`${i}`] = 1;
-      this.positive[`${i}`] = 1;
+      this.total[`${i}`] = 0;
+      this.positive[`${i}`] = 0;
     }
   }
   
@@ -27,6 +27,36 @@ class State {
     return (this.positive[index]/this.total[index])*100
   }
 
+  majority(likeCard,dislikeCard,load) {
+    let compare;
+
+    this.state = JSON.parse(load);
+    Object.keys(this.state).forEach(position => {
+      if (typeof this.state[position]['positive'] !== 'undefined') {
+        this.positive[position] = this.state[position]['positive'];
+      } else {
+        this.positive[position] = 1;
+      }
+      if (typeof this.state[position]['positive'] !== 'undefined') {
+        this.total[position] = this.state[position]['total'];
+      } else {
+        this.total[position] = 1;
+      }
+    })
+
+    Object.keys(this.state).forEach(position => {
+      compare = this.state[position]['total'] - this.state[position]['positive'];
+      if (compare > this.state[position]['positive']) {
+        likeCard[position].classList.remove('active');
+        dislikeCard[position].classList.add('active');
+      } else {
+        dislikeCard[position].classList.remove('active');
+        likeCard[position].classList.add('active');
+      }
+    })
+    
+  }
+
   save() {
     let data = JSON.stringify(this.state);
     localStorage.setItem('data',data);
@@ -35,8 +65,16 @@ class State {
   draw(bar,load) {
     this.state = JSON.parse(load);
     Object.keys(this.state).forEach(position => {
-      this.positive[position] = this.state[position]['positive'];
-      this.total[position] = this.state[position]['total'];
+      if (typeof this.state[position]['positive'] !== 'undefined') {
+        this.positive[position] = this.state[position]['positive'];
+      } else {
+        this.positive[position] = 1;
+      }
+      if (typeof this.state[position]['positive'] !== 'undefined') {
+        this.total[position] = this.state[position]['total'];
+      } else {
+        this.total[position] = 1;
+      }
     })
     for (let i = 0; i<bar.length; i++) {
       if (this.state[i]['positive'] && this.state[i]['total']) {
@@ -55,11 +93,16 @@ class State {
 
 /* DOM Events */
 
+// For Status Event
+const likeCard = document.getElementsByClassName('content--like');
+const dislikeCard = document.getElementsByClassName('content--dislike');
+
 // When Load
 window.addEventListener('load', function(e) {
-  const load = localStorage.getItem('data'); 
+  const load = localStorage.getItem('data');
   if (load) {
     value.draw(bar,load);
+    value.majority(likeCard,dislikeCard,load);
   }
 })
 
