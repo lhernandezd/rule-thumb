@@ -421,6 +421,14 @@ a {
   border:2px solid white;
 }
 
+.thumbs__button.none {
+  display:none;
+}
+
+.thumbs__button--dislike.none {
+  display: none;
+}
+
 .button__image {
   height: 20px;
   width: 20px;
