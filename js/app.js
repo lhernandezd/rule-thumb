@@ -26,10 +26,42 @@ class State {
 
     return (this.positive[index]/this.total[index])*100
   }
+
+  save() {
+    let data = JSON.stringify(this.state);
+    localStorage.setItem('data',data);
+  }
+
+  draw(bar,load) {
+    this.state = JSON.parse(load);
+    Object.keys(this.state).forEach(position => {
+      this.positive[position] = this.state[position]['positive'];
+      this.total[position] = this.state[position]['total'];
+    })
+    for (let i = 0; i<bar.length; i++) {
+      if (this.state[i]['positive'] && this.state[i]['total']) {
+        bar[i].style.width = `${(this.state[i]['positive'] / this.state[i]['total'])*100}%`;
+        like[i].innerHTML = `${Math.round((this.state[i]['positive'] / this.state[i]['total'])*100)}%`
+        dislike[i].innerHTML = `${Math.round(100 - (this.state[i]['positive'] / this.state[i]['total'])*100)}%`;
+      } else {
+        bar[i].style.width = `${50}%`;
+        like[i].innerHTML = `${50}%`
+        dislike[i].innerHTML = `${50}%`;
+      }
+    }
+  }
 }
 
 
 /* DOM Events */
+
+// When Load
+window.addEventListener('load', function(e) {
+  const load = localStorage.getItem('data'); 
+  if (load) {
+    value.draw(bar,load);
+  }
+})
 
 //Event for the navbar (toggle burger)
 const navRight = document.getElementsByClassName('navbar__section navbar__section--right');
@@ -76,6 +108,7 @@ for (let i = 0; i<vote_now.length; i++) {
       bar[i].style.width = `${percentage}%`;
       like[i].innerHTML = `${Math.round(percentage)}%`
       dislike[i].innerHTML = `${Math.round(100 - percentage)}%`;
+      value.save();
 
     } else if (thumbs_down[i].classList.contains('active')) {
 
@@ -83,6 +116,8 @@ for (let i = 0; i<vote_now.length; i++) {
       bar[i].style.width = `${percentage}%`;
       dislike[i].innerHTML = `${Math.round(100 - percentage)}%`;
       like[i].innerHTML = `${Math.round(percentage)}%`;
+      value.save();
+
     }
     textDefault[i].classList.toggle('active');
     textAgain[i].classList.toggle('active');
