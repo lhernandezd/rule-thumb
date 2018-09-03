@@ -59,7 +59,7 @@ for (let i = 0; i<thumbs_up.length; i++) {
 }
 
 //Event for Vote now
-//const vote_again = document.getElementsByClassName('button__inline--again');
+const vote_again = document.getElementsByClassName('button__inline--again');
 const vote_now = document.getElementsByClassName('button__inline--now');
 const like = document.getElementsByClassName('progress__like');
 const dislike = document.getElementsByClassName('progress__dislike');
@@ -76,7 +76,7 @@ for (let i = 0; i<vote_now.length; i++) {
       bar[i].style.width = `${percentage}%`;
       like[i].innerHTML = `${Math.round(percentage)}%`
       dislike[i].innerHTML = `${Math.round(100 - percentage)}%`;
-      
+
     } else if (thumbs_down[i].classList.contains('active')) {
 
       let percentage = value.negativeVoting(i);
@@ -84,7 +84,28 @@ for (let i = 0; i<vote_now.length; i++) {
       dislike[i].innerHTML = `${Math.round(100 - percentage)}%`;
       like[i].innerHTML = `${Math.round(percentage)}%`;
     }
+    textDefault[i].classList.toggle('active');
+    textAgain[i].classList.toggle('active');
+    vote_now[i].classList.toggle('active');
+    vote_again[i].classList.toggle('active');
+    thumbs_up[i].classList.toggle('none');
+    thumbs_down[i].classList.toggle('none');
+  })
+}
 
-    
+//Event for vote again
+const textDefault = document.getElementsByClassName('content__text--default');
+const textAgain = document.getElementsByClassName('content__text--again');
+
+for (let i = 0; i<vote_again.length; i++) {
+  vote_again[i].addEventListener('click', function(e) {
+    e.preventDefault();
+
+    textDefault[i].classList.toggle('active');
+    textAgain[i].classList.toggle('active');
+    vote_now[i].classList.toggle('active');
+    vote_again[i].classList.toggle('active');
+    thumbs_up[i].classList.toggle('none');
+    thumbs_down[i].classList.toggle('none');
   })
 }

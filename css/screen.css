@@ -373,7 +373,7 @@ a {
   font-weight: 150;
 }
 
-.content__text.active {
+.content__text--default.active , .content__text--again.active {
   display: block;
 }
 
