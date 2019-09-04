@@ -4,6 +4,7 @@
   "description": "Zemoga-Test",
   "main": "index.js",
   "scripts": {
+    "start": "node src/index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/lhernandezd/rule-thumb/issues"
   },
-  "homepage": "https://github.com/lhernandezd/rule-thumb#readme"
+  "homepage": "https://github.com/lhernandezd/rule-thumb#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
