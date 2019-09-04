@@ -1,15 +1,25 @@
 class State {
-  constructor(size) {
+  constructor(size, load) {
     this.state = {};
     this.total = [];
     this.positive = [];
     this.start = [];
 
-    for (let i = 0; i < size; i++) {
-      this.state[`${i}`] = {};
-      this.total[`${i}`] = 0;
-      this.positive[`${i}`] = 0;
-      this.start[`${i}`] = false;
+    if (load) {
+      const obj = JSON.parse(load);
+      Object.keys(obj).map((item, i) => {
+        this.state[`${i}`] = obj[item] || {};
+        this.total[`${i}`] = obj[item].total || 0;
+        this.positive[`${i}`] = obj[item].positive || 0;
+        this.start[`${i}`] = obj[item].start || false;
+      });
+    } else {
+      for (let i = 0; i < size; i++) {
+        this.state[`${i}`] = {};
+        this.total[`${i}`] = 0;
+        this.positive[`${i}`] = 0;
+        this.start[`${i}`] = false;
+      }
     }
   }
 
@@ -23,6 +33,7 @@ class State {
       return (this.positive[index] / this.total[index]) * 100;
     } else {
       this.start[index] = true;
+      this.state[index]["start"] = this.start[index];
       this.state[index]["total"] = this.total[index] = 1;
       this.state[index]["positive"] = this.positive[index] = 1;
       return 100;
@@ -39,6 +50,7 @@ class State {
       return (this.positive[index] / this.total[index]) * 100;
     } else {
       this.start[index] = true;
+      this.state[index]["start"] = this.start[index];
       this.state[index]["total"] = this.total[index] = 1;
       this.state[index]["positive"] = this.positive[index] = 0;
       return 0;
@@ -50,14 +62,11 @@ class State {
 
     if (load) this.state = JSON.parse(load);
     Object.keys(this.state).forEach(position => {
-      if (typeof this.state[position]["positive"] !== "undefined") {
+      if (this.state[position]["positive"]) {
         this.positive[position] = this.state[position]["positive"];
-      } else {
-        this.positive[position] = 1;
-      }
-      if (typeof this.state[position]["positive"] !== "undefined") {
         this.total[position] = this.state[position]["total"];
       } else {
+        this.positive[position] = 1;
         this.total[position] = 1;
       }
     });
@@ -83,19 +92,16 @@ class State {
   draw(bar, load) {
     this.state = JSON.parse(load);
     Object.keys(this.state).forEach(position => {
-      if (typeof this.state[position]["positive"] !== "undefined") {
+      if (this.state[position]["positive"]) {
         this.positive[position] = this.state[position]["positive"];
-      } else {
-        this.positive[position] = 1;
-      }
-      if (typeof this.state[position]["positive"] !== "undefined") {
         this.total[position] = this.state[position]["total"];
       } else {
+        this.positive[position] = 1;
         this.total[position] = 1;
       }
     });
     for (let i = 0; i < bar.length; i++) {
-      if (this.state[i]["positive"] && this.state[i]["total"]) {
+      if (this.state[i]["total"]) {
         bar[i].style.width = `${(this.state[i]["positive"] /
           this.state[i]["total"]) *
           100}%`;
@@ -114,7 +120,10 @@ class State {
   }
 }
 
-/* DOM Events */
+/* START: DOM Events */
+
+// Get local storage
+const load = localStorage.getItem("data");
 
 // For Status Event
 const likeCard = document.getElementsByClassName("content--like");
@@ -122,30 +131,32 @@ const dislikeCard = document.getElementsByClassName("content--dislike");
 
 // When Load
 window.addEventListener("load", function(e) {
-  const load = localStorage.getItem("data");
   if (load) {
     value.draw(bar, load);
     value.majority(likeCard, dislikeCard, load);
   }
 });
 
-//Event for the navbar
+// Event for the navbar
 const navRight = document.getElementsByClassName(
   "navbar__section navbar__section--right"
 );
 
+/* Burger event */
 document.getElementById("burger").addEventListener("click", function(e) {
   navRight[0].classList.toggle("active__block");
 });
 
+/* Close event */
 document.getElementById("close").addEventListener("click", function(e) {
   navRight[0].classList.toggle("active__block");
 });
 
-//Event Select vote
+// Event Select vote
 const thumbs_up = document.getElementsByClassName("thumbs__button");
 const thumbs_down = document.getElementsByClassName("thumbs__button--dislike");
 
+/* -- Set active the current thumb -- */
 for (let i = 0; i < thumbs_up.length; i++) {
   thumbs_up[i].addEventListener("click", function(e) {
     e.currentTarget.classList.add("active");
@@ -157,32 +168,39 @@ for (let i = 0; i < thumbs_up.length; i++) {
   });
 }
 
-//Event for Vote now
+// Event for Vote now
 const vote_again = document.getElementsByClassName("button__inline--again");
 const vote_now = document.getElementsByClassName("button__inline--now");
 const like = document.getElementsByClassName("progress__like");
 const dislike = document.getElementsByClassName("progress__dislike");
 const bar = document.getElementsByClassName("progress__value");
-let value = new State(bar.length);
+let value = new State(bar.length, load);
 
 for (let i = 0; i < vote_now.length; i++) {
   vote_now[i].addEventListener("click", function(e) {
     e.preventDefault();
 
+    /* -- Progress bar percentage calculation -- */
     if (thumbs_up[i].classList.contains("active")) {
       let percentage = value.positiveVoting(i);
       bar[i].style.width = `${percentage}%`;
       like[i].innerHTML = `${Math.round(percentage)}%`;
       dislike[i].innerHTML = `${Math.round(100 - percentage)}%`;
+      /* -- Save the values -- */
       value.save();
     } else if (thumbs_down[i].classList.contains("active")) {
       let percentage = value.negativeVoting(i);
       bar[i].style.width = `${percentage}%`;
       dislike[i].innerHTML = `${Math.round(100 - percentage)}%`;
       like[i].innerHTML = `${Math.round(percentage)}%`;
+      /* -- Save the values -- */
       value.save();
     }
+
+    /* -- Refresh the thumb indicator in card -- */
     value.majority(likeCard, dislikeCard);
+
+    /* -- Toggle the display in the card content -- */
     textDefault[i].classList.toggle("active");
     textAgain[i].classList.toggle("active");
     vote_now[i].classList.toggle("active");
@@ -192,13 +210,15 @@ for (let i = 0; i < vote_now.length; i++) {
   });
 }
 
-//Event for vote again
+// Event for vote again
 const textDefault = document.getElementsByClassName("content__text--default");
 const textAgain = document.getElementsByClassName("content__text--again");
 
 for (let i = 0; i < vote_again.length; i++) {
   vote_again[i].addEventListener("click", function(e) {
     e.preventDefault();
+
+    /* -- Toggle the display in the card content -- */
     textDefault[i].classList.toggle("active");
     textAgain[i].classList.toggle("active");
     vote_now[i].classList.toggle("active");

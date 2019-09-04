@@ -12,15 +12,39 @@ body {
   width: 100%;
 }
 
+@keyframes boing {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 a {
   color: white;
   text-decoration: none;
 }
 
+.activate:hover {
+  border: 1px solid black;
+  background: white;
+  color: black;
+  transition: 0.3s all;
+}
+
+.scale:hover {
+  transition: 0.5s all;
+  transform: scale(1.1);
+}
+
 .container {
   padding: 0 20px;
   width: 100%;
-  max-width: 1245px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
@@ -70,12 +94,13 @@ a {
 }
 
 .navbar__section--right .navbar__item:hover a {
+  transition: 0.5s color;
   color: rgba(46, 188, 181, 0.8);
 }
 
 .navbar__section--right.active__block {
   background-color: #3a3a3a;
-  box-shadow: 5px 0px 15px rgba(255, 255, 255, 1);
+  box-shadow: 2px 0px 10px rgba(255, 255, 255, 0.8);
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -104,9 +129,9 @@ a {
 }
 
 .navbar__icon {
-  height: 23px;
+  height: 30px;
   vertical-align: middle;
-  width: 23px;
+  width: 30px;
 }
 
 /*Header Article*/
@@ -175,6 +200,11 @@ a {
   display: flex;
   justify-content: center;
   width: 50%;
+}
+
+.vote:hover {
+  animation-name: boing;
+  animation-duration: 1.5s;
 }
 
 .vote--like {
@@ -309,6 +339,12 @@ a {
   width: 492px;
 }
 
+.stars__card .card__content,
+.stars__card.card--2 .card__content,
+.stars__card.card--4 .card__content {
+  height: 220px;
+}
+
 .stars__card.card--2 {
   background-image: url(../images/mark.png);
 }
@@ -318,7 +354,7 @@ a {
 }
 
 .stars__card.card--3 .card__content {
-  height: 208px;
+  height: 266px;
 }
 
 .stars__card.card--4 {
@@ -374,7 +410,7 @@ a {
 
 .content__title {
   display: inline-block;
-  font-size: 38px;
+  font-size: 32px;
   font-weight: 400;
   margin: 0;
   vertical-align: sub;
@@ -395,17 +431,21 @@ a {
   display: none;
   font-size: 16px;
   font-weight: 150;
+  margin: 30px auto;
 }
 
 .content__text--default.active,
 .content__text--again.active {
   display: block;
+  height: 57px;
 }
 
 /*Buttons of each star*/
 .content__buttons {
   align-items: center;
+  bottom: 0;
   display: inline-flex;
+  position: absolute;
   width: 100%;
 }
 
@@ -498,6 +538,7 @@ a {
   display: inline-block;
   height: 100%;
   width: 50%;
+  transition: 0.5s all;
 }
 
 .progress__like {
@@ -579,6 +620,7 @@ a {
 
 .footer__link {
   color: #979797;
+  display: inline-block;
   font-size: 12px;
   margin: 10px;
 }
@@ -626,6 +668,10 @@ a {
     background-position: center;
   }
 
+  .content__text {
+    margin: 20px auto;
+  }
+
   /*Stars Footer*/
   .stars__footer--text {
     font-size: 20px;
@@ -645,6 +691,11 @@ a {
 
   .footer__div {
     width: 100%;
+  }
+
+  .footer__div--media {
+    display: flex;
+    justify-content: space-around;
   }
 
   .footer__link {
@@ -743,6 +794,24 @@ a {
 
   .stars__card {
     width: 48%;
+  }
+
+  .stars__card .card__content,
+  .stars__card.card--2 .card__content,
+  .stars__card.card--4 .card__content {
+    height: auto;
+  }
+
+  .stars__card.card--3 .card__content {
+    height: 208px;
+  }
+
+  .content__title {
+    font-size: 38px;
+  }
+
+  .content__text {
+    margin: 15px auto 30px;
   }
 
   /*Stars footer*/
