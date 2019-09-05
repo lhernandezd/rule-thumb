@@ -144,12 +144,12 @@ const navRight = document.getElementsByClassName(
 
 /* Burger event */
 document.getElementById("burger").addEventListener("click", function(e) {
-  navRight[0].classList.toggle("active__block");
+  navRight[0].style.top = '0';
 });
 
 /* Close event */
 document.getElementById("close").addEventListener("click", function(e) {
-  navRight[0].classList.toggle("active__block");
+  navRight[0].style.top = '-100vh';
 });
 
 // Event Select vote
