@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node src/index",
-    "dev": "cross-env NODE_ENV=development nodemon --inspect src/index",
+    "dev": "webpack-dev-server --config webpack.config.dev.js --open",
     "test": "cross-env NODE_ENV=test echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack --mode development --watch"
+    "build": "webpack --config webpack.config.prod.js",
+    "server": "cross-env NODE_ENV=development nodemon --inspect src/index"
   },
   "repository": {
     "type": "git",
