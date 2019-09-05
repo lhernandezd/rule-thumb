@@ -1,0 +1,36 @@
+{
+  "name": "rule_thumb",
+  "version": "1.0.0",
+  "description": "Zemoga-Test",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node src/index",
+    "dev": "cross-env NODE_ENV=development nodemon --inspect src/index",
+    "test": "cross-env NODE_ENV=test echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lhernandezd/rule-thumb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lhernandezd/rule-thumb/issues"
+  },
+  "homepage": "https://github.com/lhernandezd/rule-thumb#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "cross-env": "^5.2.1",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "express-request-id": "^1.4.1",
+    "morgan": "^1.9.1",
+    "strip-final-newline": "^2.0.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}
