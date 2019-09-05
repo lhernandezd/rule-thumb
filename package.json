@@ -32,6 +32,7 @@
     "morgan": "^1.9.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
     "strip-final-newline": "^2.0.0",
     "winston": "^3.2.1"
   },
