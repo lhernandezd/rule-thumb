@@ -1,9 +1,16 @@
 const express = require('express');
 const requestId = require('express-request-id')();
+const bodyParser = require('body-parser');
 const logger = require('./config/logger');
 const app = express();
 
 const api = require('./api/v1');
+
+// Middleware
+/* Parse application/x-www-form-urlencoded */
+app.use(bodyParser.urlencoded({ extended: false }));
+/* Parse application/json */
+app.use(bodyParser.json());
 
 // Middleware for logs
 app.use(requestId);
@@ -26,7 +33,7 @@ app.use((req, res, next) => {
 // Error middleware
 app.use((err, req, res, next) => {
   const { message, statusCode = 500 } = err;
-  
+
   res.status(statusCode);
   res.json({
     message,
