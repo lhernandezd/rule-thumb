@@ -6,7 +6,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node src/index",
     "dev": "cross-env NODE_ENV=development nodemon --inspect src/index",
-    "test": "cross-env NODE_ENV=test echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env NODE_ENV=test echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack --mode development --watch"
   },
   "repository": {
     "type": "git",
@@ -26,11 +27,29 @@
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "express-request-id": "^1.4.1",
+    "mongoose": "^5.6.12",
     "morgan": "^1.9.1",
     "strip-final-newline": "^2.0.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "nodemon": "^1.19.2"
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.12.0",
+    "nodemon": "^1.19.2",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0",
+    "webpack-merge": "^4.2.2"
   }
 }
