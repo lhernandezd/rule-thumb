@@ -17,7 +17,7 @@ export default function Card(props) {
     setActive(value);
   };
 
-  const { name = 'Malala', category = 'Politics', photo = 'https://i.ibb.co/YBTbPQY/mark.png', description = "description", percentage = 51 } = props;
+  const { votes, name, category, photo, description, percentage } = props;
   return (
     <article className="stars__card" style={{ backgroundImage: `url(${photo})`}}>
       <div className="card__content">
@@ -91,20 +91,20 @@ export default function Card(props) {
         </div>
       </div>
       <div className="card__progress">
-        <span className="progress__value" style={{ width: `${percentage || '50'}%`}}></span>
+        <span className="progress__value" style={{ width: `${votes ? percentage : '50'}%`}}></span>
         <img
           className="progress__icon--like"
           src={Like}
           alt="like"
         />
-        <span className="progress__like">{`${percentage}%` || '50%'}</span>
+        <span className="progress__like">{`${votes ? percentage : '50'}%`}</span>
         <img
           className="progress__icon--dislike"
           src={Like}
           alt="dislike"
         />
         <span className="progress__dislike">
-        {percentage 
+        {votes
           ? `${100 - percentage}%`
           : '50%'
         }
