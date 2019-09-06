@@ -35,6 +35,9 @@ a {
 	color: $color_2;
 	text-decoration: none;
 }
+.navigation__link {
+	color: $color_3;
+}
 .activate {
 	&:hover {
 		border: 1px solid black;
@@ -289,7 +292,6 @@ a {
 	width: 100%;
 }
 .stars__card {
-	background-image: url(../../public/assets/kanye.png);
 	background-size: auto;
 	height: 550px;
 	margin-bottom: 40px;
@@ -303,16 +305,13 @@ a {
 	.card__content {
 		height: 220px;
 	}
-	background-image: url(../../public/assets/mark.png);
 }
 .stars__card.card--4 {
 	.card__content {
 		height: 220px;
 	}
-	background-image: url(../../public/assets/malala.png);
 }
 .stars__card.card--3 {
-	background-image: url(../../public/assets/cristina.png);
 	.card__content {
 		height: 266px;
 	}
