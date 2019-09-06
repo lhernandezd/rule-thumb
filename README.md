@@ -28,7 +28,7 @@ The projects is divided in 3 branches:
 
 2. Enter the project route
 
-        cd rule_thumb
+        cd rule-thumb
 
 3. Install all the dependencies
 
