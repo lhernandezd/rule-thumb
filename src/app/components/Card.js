@@ -1,14 +1,32 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import classNames from 'classnames';
 import Like from '../../public/assets/like.svg';
+import axios from 'axios';
+import config from '../config.json'
 
 export default function Card(props) {
+  const [ totalVotes, setTotalVotes ] = useState(props.votes);
+  const [ plusVotes, setPlusVotes ] = useState(props.positiveVotes);
   const [ toggle, setToggle ] = useState(false);
   const [ active, setActive ] = useState('none');
 
-  const handleToggle = () => {
+  useEffect(()=> {
+    let payload = { votes: totalVotes, positiveVotes: plusVotes };
+    const fetchPost = async() => {
+      try {
+        await axios.put(`${config.baseUrl}/candidates/${props.id}`, payload);
+        props.handleReload();
+      } catch (error) {
+        console.log(error)
+      }
+    };
+    fetchPost();
+  }, [totalVotes]);
+
+  const handleToggle = async () => {
     if (!toggle && active != 'none') {
-      console.log('Envia Voto!')
+      setTotalVotes(totalVotes + 1);
+      active === 'positive' && setPlusVotes(plusVotes + 1);
     }
     active != 'none' && setToggle(!toggle);
   };

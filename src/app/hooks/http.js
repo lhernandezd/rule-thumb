@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const useHttpGet = (url, dependencies) => {
@@ -9,6 +9,7 @@ const useHttpGet = (url, dependencies) => {
       try {
         const response = await axios.get(url);
         const { data: { data} } = response;
+        console.log(response)
         setFetchData(data);
       } catch (error) {
         console.log(error);
