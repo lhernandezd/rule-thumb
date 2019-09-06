@@ -2,11 +2,21 @@ const express = require('express');
 const requestId = require('express-request-id')();
 const bodyParser = require('body-parser');
 const logger = require('./config/logger');
+const cors = require('cors');
 const app = express();
 
+const config = require('./config');
 const api = require('./api/v1');
 
 // Middleware
+app.use(
+  cors({
+    origin: config.server.origin,
+    methods: ['HEAD', 'OPTIONS', 'GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Accept', 'Content-Type', 'Authorization'],
+  }),
+);
+
 /* Parse application/x-www-form-urlencoded */
 app.use(bodyParser.urlencoded({ extended: false }));
 /* Parse application/json */

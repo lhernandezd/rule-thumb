@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node src/index",
-    "dev": "cross-env NODE_ENV=development nodemon --inspect src/index",
-    "test": "cross-env NODE_ENV=test echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack-dev-server --config webpack.config.dev.js --open",
+    "test": "cross-env NODE_ENV=test echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.prod.js --open",
+    "server": "cross-env NODE_ENV=development nodemon --inspect src/index",
+    "toDatabase": "node objectToDatabase.js"
   },
   "repository": {
     "type": "git",
@@ -20,16 +23,40 @@
   },
   "homepage": "https://github.com/lhernandezd/rule-thumb#readme",
   "dependencies": {
+    "axios": "^0.19.0",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "classnames": "^2.2.6",
     "cross-env": "^5.2.1",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "express-request-id": "^1.4.1",
+    "mongoose": "^5.6.12",
     "morgan": "^1.9.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
     "strip-final-newline": "^2.0.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "nodemon": "^1.19.2"
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.12.0",
+    "nodemon": "^1.19.2",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0",
+    "webpack-merge": "^4.2.2"
   }
 }

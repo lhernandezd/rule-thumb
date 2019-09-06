@@ -1,8 +1,9 @@
-require('dotenv').config();;
+require('dotenv').config();
 
 const config = {
   server: {
     port: process.env.PORT || 3000,
+    origin: '*',
   },
   database: {
     protocol: process.env.DATABASE_PROTOCOL,
