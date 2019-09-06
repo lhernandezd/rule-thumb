@@ -25,6 +25,12 @@ export default function Home() {
           opinion, we analyze and put the data in a public report.`}
         />
         <CardContainer candidates={candidates || []} handleReload={handleReload}/>
+        <div className="stars__footer">
+          <p className="stars__footer--text">
+            Is there anyone else you would want us to add ?
+          </p>
+          <span className="stars__footer--link">Submit a Name</span>
+        </div>
       </div>
     </Fragment>
   )
