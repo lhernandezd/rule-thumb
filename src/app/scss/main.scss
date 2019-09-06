@@ -74,7 +74,7 @@ a {
 	margin: 0 auto;
 }
 .header {
-	background-image: linear-gradient( 0deg, rgba(255, 255, 255, 0) 0, rgba(0, 0, 0, 0.7) 100% ), url(../images/francis.png);
+	background-image: linear-gradient( 0deg, rgba(255, 255, 255, 0) 0, rgba(0, 0, 0, 0.7) 100% ), url(../../public/assets/francis.png);
 	background-repeat: no-repeat, no-repeat;
 	background-size: 100% 150px, cover;
 	background-position: 0px 0px, center;
@@ -134,6 +134,7 @@ a {
 	.navbar__link {
 		font-size: 14px;
 		font-weight: 100;
+		cursor: pointer;
 	}
 }
 .navbar__icon {
@@ -306,7 +307,7 @@ a {
 	width: 100%;
 }
 .stars__card {
-	background-image: url(../images/kanye.png);
+	background-image: url(../../public/assets/kanye.png);
 	background-size: auto;
 	height: 550px;
 	margin-bottom: 40px;
@@ -320,16 +321,16 @@ a {
 	.card__content {
 		height: 220px;
 	}
-	background-image: url(../images/mark.png);
+	background-image: url(../../public/assets/mark.png);
 }
 .stars__card.card--4 {
 	.card__content {
 		height: 220px;
 	}
-	background-image: url(../images/malala.png);
+	background-image: url(../../public/assets/malala.png);
 }
 .stars__card.card--3 {
-	background-image: url(../images/cristina.png);
+	background-image: url(../../public/assets/cristina.png);
 	.card__content {
 		height: 266px;
 	}
@@ -517,7 +518,7 @@ a {
 }
 .stars__footer {
 	align-items: center;
-	background-image: linear-gradient( rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8) ), url(../images/people.png);
+	background-image: linear-gradient( rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8) ), url(../../public/assets/people.png);
 	background-size: auto, auto;
 	display: flex;
 	height: 80px;

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <div>
+    <div className='container'>
       Auth
       <Link to='/home'>
       Go to Home
