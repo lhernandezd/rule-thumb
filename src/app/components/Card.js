@@ -37,18 +37,18 @@ export default function Card(props) {
 
   const { votes, name, category, photo, description, percentage } = props;
   return (
-    <article className="stars__card" style={{ backgroundImage: `url(${photo})`}}>
-      <div className="card__content">
+    <article className='stars__card' style={{ backgroundImage: `url(${photo})`}}>
+      <div className='card__content'>
         <div className={classNames('content content--like', percentage >= 50 && 'active')}>
-          <img src={Like} alt="like" className="content__icon" />
+          <img src={Like} alt='like' className='content__icon' />
         </div>
         <div className={classNames('content content--dislike', percentage < 50 && 'active')}>
-          <img src={Like} alt="dislike" className="content__icon" />
+          <img src={Like} alt='dislike' className='content__icon' />
         </div>
-        <div className="content__container">
-          <h3 className="content__title">{name}</h3>
-          <p className="content__description">
-            <span className="description__span">1 month ago </span>
+        <div className='content__container'>
+          <h3 className='content__title'>{name}</h3>
+          <p className='content__description'>
+            <span className='description__span'>1 month ago </span>
             in {category}
           </p>
           <p className={classNames('content__text content__text--default', !toggle && 'active')}>
@@ -57,7 +57,7 @@ export default function Card(props) {
           <p className={classNames('content__text content__text--again', toggle && 'active')}>
             Thank you for voting!
           </p>
-          <div className="content__buttons">
+          <div className='content__buttons'>
             {!toggle ?
               <Fragment>
                 <div 
@@ -67,7 +67,7 @@ export default function Card(props) {
                   )} 
                   onClick={() => handleActive('positive')}
                 >
-                  <img src={Like} alt="thumb up" className="button__image" />
+                  <img src={Like} alt='thumb up' className='button__image' />
                 </div>
                 <div 
                   className={classNames(
@@ -78,14 +78,14 @@ export default function Card(props) {
                 >
                   <img
                     src={Like}
-                    alt="thumb down"
-                    className="button__image button__image--dislike"
+                    alt='thumb down'
+                    className='button__image button__image--dislike'
                   />
                 </div>
               </Fragment>
               : null
             }
-            <div className="buttons vote__button">
+            <div className='buttons vote__button'>
               <div 
                 onClick={handleToggle} 
                 className={classNames(
@@ -108,20 +108,20 @@ export default function Card(props) {
           </div>
         </div>
       </div>
-      <div className="card__progress">
-        <span className="progress__value" style={{ width: `${votes ? percentage : '50'}%`}}></span>
+      <div className='card__progress'>
+        <span className='progress__value' style={{ width: `${votes ? percentage : '50'}%`}}></span>
         <img
-          className="progress__icon--like"
+          className='progress__icon--like'
           src={Like}
-          alt="like"
+          alt='like'
         />
-        <span className="progress__like">{`${votes ? percentage : '50'}%`}</span>
+        <span className='progress__like'>{`${votes ? percentage : '50'}%`}</span>
         <img
-          className="progress__icon--dislike"
+          className='progress__icon--dislike'
           src={Like}
-          alt="dislike"
+          alt='dislike'
         />
-        <span className="progress__dislike">
+        <span className='progress__dislike'>
         {votes
           ? `${100 - percentage}%`
           : '50%'

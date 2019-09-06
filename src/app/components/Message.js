@@ -7,15 +7,15 @@ export default function Message(props) {
   const { title, subtitle, description } = props;
 
   let content = (
-    <section className="message">
-      <h2 className="message__title">
+    <section className='message'>
+      <h2 className='message__title'>
         {title}
-        <span className="message__title title__span">{subtitle}</span>
+        <span className='message__title title__span'>{subtitle}</span>
       </h2>
-      <p className="message__text">
+      <p className='message__text'>
         {description}
       </p>
-      <img className="message__icon scale" src={Close} alt="close" onClick={() => setClosed(true)}/>
+      <img className='message__icon scale' src={Close} alt='close' onClick={() => setClosed(true)}/>
     </section>
   );
 

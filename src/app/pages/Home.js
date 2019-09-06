@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import Header from '../components/Header';
 import Message from '../components/Message';
 import CardContainer from '../components/CardContainer';
+import Footer from '../components/Footer';
 import { useHttpGet } from '../hooks/http';
 import config from '../config.json'
 
@@ -25,12 +26,13 @@ export default function Home() {
           opinion, we analyze and put the data in a public report.`}
         />
         <CardContainer candidates={candidates || []} handleReload={handleReload}/>
-        <div className="stars__footer">
-          <p className="stars__footer--text">
+        <div className='stars__footer'>
+          <p className='stars__footer--text'>
             Is there anyone else you would want us to add ?
           </p>
-          <span className="stars__footer--link">Submit a Name</span>
+          <span className='stars__footer--link scale'>Submit a Name</span>
         </div>
+        <Footer />
       </div>
     </Fragment>
   )
