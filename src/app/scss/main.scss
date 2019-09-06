@@ -343,6 +343,7 @@ a {
 	height: 163px;
 	margin-bottom: 33px;
 	position: absolute;
+	width: 100%;
 }
 .content__container {
 	padding: 0 15px;
@@ -458,6 +459,7 @@ a {
 }
 .button__inline {
 	border: 1px solid white;
+	cursor: pointer;
 	display: none;
 	font-size: 13px;
 	padding: 12px 20px;
